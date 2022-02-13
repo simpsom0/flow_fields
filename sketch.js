@@ -5,7 +5,28 @@ var rows, cols;
 var inc = 0.1; // how fast the flow field morphs
 var zoff = 0, xoff, yoff; // starting position in flow field
 
+// main object
+class Vector {
+  constructor(x, y, direction, magnitude) {
+    this.x = x;
+    this.y = y;
+    this.direction = direction;
+    this.magnitude = magnitude;
+  }
 
+  // setters
+  setDirection(newDirection) { this.direction = newDirection; }
+  setMagnitude(newMagnitude) { this.magnitude = newMagnitude; }
+  setPos(newPos) { this.x = this.setX(newPos[0]);
+                   this.y = this.setY(newPos[1]); }
+  setX(newX) { this.x = newX; }
+  setY(newY) { this.y = newY; }
+
+  // getters
+  getDirection() { return this.direction; }
+  getMagnitude() { return this.magnitude;  }
+  getPos() { return [this.x, this.y]; }
+}
 
 // ran once before draw()
 function setup() {
@@ -15,6 +36,7 @@ function setup() {
   calcDimensions();
   background(255);
 }
+
 
 // loops infinitely 
 function draw() {
@@ -35,6 +57,7 @@ function draw() {
   zoff += inc;
 }
 
+
 // uses the var 'detail' to
 // calculate rows & cols. Translates to
 // amount of flow field nodes
@@ -42,6 +65,7 @@ function calcDimensions() {
   rows = floor(height / detail);
   cols = floor(width / detail);
 }
+
 
 // resizes the canvas, then 
 // re-calculates how many rows & columns there should be
